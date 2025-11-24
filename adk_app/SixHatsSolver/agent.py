@@ -1,8 +1,8 @@
 import os
 from dotenv import load_dotenv
 from google.adk.agents import Agent, ParallelAgent, SequentialAgent
-from agents_intensive_capstone.agents.blue_hat_agent import BlueHatAgent
-from agents_intensive_capstone.agents.green_hat_agent import GreenHatAgent
+from agents_intensive_capstone.agents import blue_hat_agent, green_hat_agent, yellow_hat_agent
+
 from pathlib import Path
 
 import os, litellm 
@@ -33,14 +33,13 @@ black_hat = Agent(
 )
 
 # YELLOW HAT: Optimism & Benefits
-yellow_hat = Agent(
-    name="YellowHat",
+yellow_hat = yellow_hat_agent.YellowHatAgent.create(
     model=model,
-    instruction="You are the Yellow Hat. Focus on the positives. What are the benefits? What is the best-case scenario? Why will this work?",
+    prompt_folder=Path("../src/agents_intensive_capstone/prompts"),
 )
 
 # GREEN HAT: Creativity & Alternatives
-green_hat = GreenHatAgent.create(
+green_hat = green_hat_agent.GreenHatAgent.create(
     model=model,
     prompt_folder=Path("./src/agents_intensive_capstone/prompts"),
 )
@@ -54,7 +53,7 @@ thinking_team = ParallelAgent(
 
 # 4. Define the Blue Hat (The Manager)
 # This agent sees the combined output of the team and makes the plan
-blue_hat = BlueHatAgent.create(
+blue_hat = blue_hat_agent.BlueHatAgent.create(
     model=model,
     prompt_folder=Path("./src/agents_intensive_capstone/prompts"),
 )
