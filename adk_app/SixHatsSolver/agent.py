@@ -2,13 +2,26 @@ import os
 from dotenv import load_dotenv
 from google.adk.agents import Agent, ParallelAgent, SequentialAgent
 from agents_intensive_capstone.agents import blue_hat_agent, green_hat_agent, yellow_hat_agent
+from google.adk.models.google_llm import Gemini
+from google.genai import types
 
 from pathlib import Path
 
-import os, litellm 
-from google.adk.models.lite_llm import LiteLlm 
-litellm.use_litellm_proxy = True 
-model = LiteLlm( model="gpt-oss-20b")
+# import os, litellm 
+# from google.adk.models.lite_llm import LiteLlm 
+# litellm.use_litellm_proxy = True 
+# model = LiteLlm( model="gpt-oss-20b")
+retry_config = types.HttpRetryOptions(
+    attempts=5,  # Maximum retry attempts
+    exp_base=7,  # Delay multiplier
+    initial_delay=1,
+    http_status_codes=[429, 500, 503, 504],  # Retry on these HTTP errors
+)
+
+model = Gemini(
+    model="gemini-2.5-flash-lite",
+    retry_options=retry_config,
+)
 
 # Define the 5 "Thinking" Agents (The Team)
 # WHITE HAT: Facts & Data
