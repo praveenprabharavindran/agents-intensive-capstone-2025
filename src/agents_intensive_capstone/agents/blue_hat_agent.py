@@ -41,7 +41,7 @@ class BlueHatAgent(LlmAgent):
     # These default values are used if a caller constructs BlueHatAgent
     # directly without the convenience constructor.
     instruction: str = DEFAULT_BLUE_HAT_PROMPT
-    output_key: str = "final_plan"
+    output_key: str = "blue_hat_final_plan"
 
     # Filename that holds the prompt (used by the factory constructor).
     PROMPT_FILENAME: ClassVar[str] = "blue_hat_prompt.txt"

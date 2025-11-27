@@ -41,7 +41,7 @@ def test_prompt_is_loaded(prompt_folder: Path):
     agent = GreenHatAgent.create(
         model=model,
         prompt_folder=prompt_folder,
-        # output_key="final_plan"
+        output_key="green_hat_plan",
         )
     assert "You are the Green Hat" in agent.instruction
     # The default prompt should **not** be used because the file exists

@@ -20,6 +20,7 @@ dependencies = [
   "httpx>=0.27",
   "python-dotenv>=1.0",
   "google-adk",
+  "google-adk[eval]",
   "rich",              # nice console logging for debugging / CLI
   "litellm"
 ]

@@ -29,6 +29,7 @@ white_hat = Agent(
     name="WhiteHat",
     model=model,
     instruction="You are the White Hat. Focus ONLY on available data, facts, and information gaps. Be objective and neutral. Do not offer opinions, only verifiable facts or questions about missing data.",
+    output_key="white_hat_plan"
 )
 
 # RED HAT: Emotions & Intuition
@@ -36,6 +37,7 @@ red_hat = Agent(
     name="RedHat",
     model=model,
     instruction="You are the Red Hat. Focus on intuition, hunches, and emotional reaction. How does this problem make users or the team feel? You do not need to justify your feelings with logic.",
+    output_key="red_hat_plan"
 )
 
 # BLACK HAT: Caution & Risk
@@ -43,6 +45,7 @@ black_hat = Agent(
     name="BlackHat",
     model=model,
     instruction="You are the Black Hat. Play the devil's advocate. Identify specific risks, potential failure points, downsides, and why this idea might NOT work. Be critical.",
+    output_key="black_hat_plan"
 )
 
 # YELLOW HAT: Optimism & Benefits

@@ -49,7 +49,7 @@ class YellowHatAgent(LlmAgent):
     # Default values if someone instantiates YellowHatAgent directly
     # without using the `create` factory.
     instruction: str = DEFAULT_YELLOW_HAT_PROMPT
-    output_key: str = "yellowhat_findings"
+    output_key: str = "yellow_hat_plan"
 
     # Filename holding the prompt (used by the factory constructor).
     PROMPT_FILENAME: ClassVar[str] = "yellow_hat_prompt.txt"
