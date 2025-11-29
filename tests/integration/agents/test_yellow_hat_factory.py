@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-from pathlib import Path
 
 import litellm
 import pytest
@@ -12,21 +11,6 @@ from google.genai import types
 
 from agents_intensive_capstone.agents.yellow_hat_factory import YellowHatFactory
 
-
-# ----------------------------------------------------------------------
-# 3️⃣  Fixture that creates a temporary prompt folder
-# ----------------------------------------------------------------------
-@pytest.fixture
-def prompt_folder(tmp_path: Path) -> Path:
-    """
-    Creates a temporary directory containing a minimal Yellow‑Hat prompt.
-    """
-    prompt_file = tmp_path / "yellow_hat_prompt.txt"
-    prompt_file.write_text(
-        "You are the Yellow Hat. "
-        "Your role is to highlight optimism and constructive possibilities."
-    )
-    return tmp_path
 
 @pytest.fixture
 def main_model() -> None:
@@ -57,7 +41,7 @@ def test_yellow_hat_factory_create_happy_path(
 ) -> None:
 
     # Capture INFO‑level logs from the factory module
-    caplog.set_level(logging.INFO, logger="agents_intensive_capstone.agents.yellow_hat")
+    caplog.set_level(logging.INFO, logger="agents_intensive_capstone.agents.yellow_hat_factory")
 
 
     agent = YellowHatFactory.create(
