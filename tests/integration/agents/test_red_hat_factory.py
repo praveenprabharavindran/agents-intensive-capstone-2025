@@ -38,7 +38,6 @@ def search_model() -> None:
 @pytest.mark.asyncio
 async def test_red_hat_factory_create_happy_path(
     main_model: Gemini,
-    search_model: Gemini,
     caplog: pytest.LogCaptureFixture,
 ) -> None:
 
@@ -47,8 +46,7 @@ async def test_red_hat_factory_create_happy_path(
 
 
     agent = RedHatFactory.create(
-        model=main_model,
-        search_model=search_model
+        model=main_model
     )
 
     runner = InMemoryRunner(

@@ -1,83 +1,156 @@
+import logging
+import sys
+from dataclasses import dataclass, field
+from typing import List
 
 import litellm
-from google.adk.agents import Agent, ParallelAgent, SequentialAgent
+from google.adk.agents import ParallelAgent, SequentialAgent
 from google.adk.models.google_llm import Gemini
 from google.adk.models.lite_llm import LiteLlm
 from google.genai import types
 
+# Custom Hat Factories
 from agents_intensive_capstone.agents import (
     black_hat_factory,
     blue_hat_factory,
     green_hat_factory,
+    red_hat_factory,
     white_hat_factory,
     yellow_hat_factory,
 )
 
-retry_config = types.HttpRetryOptions(
-    attempts=5,  # Maximum retry attempts
-    exp_base=7,  # Delay multiplier
-    initial_delay=1,
-    http_status_codes=[429, 500, 503, 504],  # Retry on these HTTP errors
-)
+# ==========================================
+# LOGGING & CONFIGURATION
+# ==========================================
 
-litellm.use_litellm_proxy = True
-gpt_model = LiteLlm(model="gpt-oss-20b")
+def setup_logging():
+    """Configures logging to show timestamps and levels in ADK logs."""
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+        handlers=[logging.StreamHandler(sys.stdout)]
+    )
+    return logging.getLogger("SixHatsAgent")
 
-gemini_model = Gemini(
-    model="gemini-2.5-flash-lite",
-    retry_options=retry_config,
-)
+logger = setup_logging()
 
-# main_model = search_model
+@dataclass
+class AgentConfig:
+    """Central configuration for models and retries."""
+    # # Models
+    gemini_model: str = "gemini-2.5-flash-lite"
+    gpt_model: str = "gpt-oss-20b"
+    enable_proxy: bool = True
+    
+    # Retry Logic
+    retry_attempts: int = 5
+    retry_base: int = 7
+    retry_codes: List[int] = field(default_factory=lambda: [429, 500, 503, 504])
 
-# WHITE HAT: Facts & Data
-white_hat = white_hat_factory.WhiteHatFactory.create(
-    model=gemini_model
-)
+    @property
+    def http_retry_options(self) -> types.HttpRetryOptions:
+        return types.HttpRetryOptions(
+            attempts=self.retry_attempts,
+            exp_base=self.retry_base,
+            initial_delay=1,
+            http_status_codes=self.retry_codes,
+        )
 
-# RED HAT: Emotions & Intuition
-red_hat = Agent(
-    name="RedHat",
-    model=gpt_model,
-    instruction="You are the Red Hat. Focus on intuition, hunches, and emotional reaction. How does this problem make users or the team feel? You do not need to justify your feelings with logic.",
-    output_key="red_hat_plan"
-)
+# ==========================================
+# FACTORY HELPER
+# ==========================================
 
-# BLACK HAT: Caution & Risk
-black_hat = black_hat_factory.BlackHatFactory.create(
-    model=gpt_model
-)
+class ModelBuilder:
+    """Helper to initialize models with consistent settings."""
+    def __init__(self, config: AgentConfig):
+        self.config = config
+        
+        # Set global LiteLLM settings
+        litellm.use_litellm_proxy = self.config.enable_proxy
+        if self.config.enable_proxy:
+            logger.info("LiteLLM Proxy enabled.")
 
-# YELLOW HAT: Optimism & Benefits
-yellow_hat = yellow_hat_factory.YellowHatFactory.create(
-    model=gemini_model,
-    search_model=gemini_model
-)
+    def create_gemini(self) -> Gemini:
+        logger.debug(f"Creating Gemini model: {self.config.gemini_model}")
+        return Gemini(
+            model=self.config.gemini_model,
+            retry_options=self.config.http_retry_options,
+        )
 
-# GREEN HAT: Creativity & Alternatives
-green_hat = green_hat_factory.GreenHatFactory.create(
-    model=gpt_model
-)
+    def create_litellm(self) -> LiteLlm:
+        logger.debug(f"Creating LiteLLM model: {self.config.gpt_model}")
+        return LiteLlm(model=self.config.gpt_model)
 
-# Create the Parallel Group
-# This runs all 5 agents at the same time on the user prompt
-thinking_team = ParallelAgent(
-    name="SixHatsBrainstorm",
-    sub_agents=[white_hat, red_hat, black_hat, yellow_hat, green_hat]
-)
+# ==========================================
+# WORKFLOW ASSEMBLY
+# ==========================================
 
-# 4. Define the Blue Hat (The Manager)
-# This agent sees the combined output of the team and makes the plan
-blue_hat = blue_hat_factory.BlueHatFactory.create(
-    model=gpt_model
-)
+def build_six_hats_agent() -> SequentialAgent:
+    """Instantiates all hats and assembles the Parallel->Sequential workflow."""
+    logger.info("Initializing Six Hats Agent Workflow...")
+    
+    config = AgentConfig()
+    builder = ModelBuilder(config)
+    
+    # Instantiate Models
+    gemini = builder.create_gemini()
+    gpt = builder.create_litellm()
 
-# Create the Final Workflow
-# First run the team (Parallel), then run the manager (Sequential)
-# Root agent
-root_agent = SequentialAgent(
-    name="SixHatsSolver",
-    sub_agents=[thinking_team, blue_hat]
-)
+    try:
+        # --- Instantiate The 6 Hats ---
+        
+        # WHITE HAT: Facts & Data
+        white_hat = white_hat_factory.WhiteHatFactory.create(model=gemini)
+        
+        # RED HAT: Emotions & Intuition
+        red_hat = red_hat_factory.RedHatFactory.create(model=gemini)
+        
+        # BLACK HAT: Caution & Risk
+        black_hat = black_hat_factory.BlackHatFactory.create(model=gpt)
+        
+        # YELLOW HAT: Optimism & Benefits
+        yellow_hat = yellow_hat_factory.YellowHatFactory.create(
+            model=gemini, 
+            search_model=gemini
+        )
+        
+        # GREEN HAT: Creativity & Alternatives
+        green_hat = green_hat_factory.GreenHatFactory.create(model=gpt)
+        
+        # BLUE HAT: The Manager/Synthesizer
+        blue_hat = blue_hat_factory.BlueHatFactory.create(model=gpt)
 
+        logger.info("All Hat sub-agents created successfully.")
 
+    except Exception as e:
+        logger.critical(f"Error creating sub-agents: {e}")
+        raise e
+
+    # --- Define Topology ---
+
+    # Step 1: Brainstorm (Parallel)
+    thinking_team = ParallelAgent(
+        name="SixHatsBrainstorm",
+        sub_agents=[white_hat, red_hat, black_hat, yellow_hat, green_hat]
+    )
+
+    # Step 2: Solve (Sequential)
+    # The Blue Hat takes the output of the thinking_team and finalizes it
+    main_agent = SequentialAgent(
+        name="SixHatsSolver",
+        sub_agents=[thinking_team, blue_hat]
+    )
+    
+    logger.info("Agent assembly complete. Ready to serve.")
+    return main_agent
+
+# ==========================================
+# EXPORT FOR ADK WEBUI
+# ==========================================
+
+# The WebUI expects an 'agent' object to exist in the global scope.
+try:
+    root_agent = build_six_hats_agent()
+except Exception as e:
+    logger.critical("Failed to load agent for WebUI.", exc_info=True)
+    raise e
