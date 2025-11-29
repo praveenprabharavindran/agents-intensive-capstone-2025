@@ -22,7 +22,8 @@ dependencies = [
   "google-adk",
   "google-adk[eval]",
   "rich",              # nice console logging for debugging / CLI
-  "litellm"
+  "litellm",
+  "pytest-asyncio"
 ]
 
 [project.optional-dependencies]
