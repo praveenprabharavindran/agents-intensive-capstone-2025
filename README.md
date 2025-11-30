@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-The Six Hats Solver uses autonomous agents to replicate Edward de Bono’s structured thinking methodology. Each “hat” acts as a specialized cognitive module, enabling AI to provide deeper, more diverse, and more actionable insights than a single‑model approach. This system improves decision quality by combining critical reasoning, creativity, emotional awareness, and structured synthesis.
+The Six Hats Solver uses intelligent autonomous agents inspired by Edward de Bono’s Six Thinking Hats framework. While this project draws conceptual inspiration from de Bono’s work, it is an independent software implementation and is not an official, endorsed, or fully faithful reproduction of the original methodology. Each “hat” functions as a specialized cognitive lens, enabling richer, more diverse, and more actionable insights than a single-model response. This system enhances decision‑making by integrating critical reasoning, creativity, emotional awareness, and structured synthesis.
 
 ## Table of Contents
 
@@ -38,23 +38,23 @@ The Six Hats Solver uses autonomous agents to replicate Edward de Bono’s struc
   - [**Result**](#result)
 - [Why Six Hats Works for AI](#why-six-hats-works-for-ai)
 - [Demo: End-to-End Six Hats Analysis Example](#demo-end-to-end-six-hats-analysis-example)
-  - [📝 **Input Prompt to SixHatsSolver**](#-input-prompt-to-sixhatssolver)
+- [**Input Prompt to SixHatsSolver**](#input-prompt-to-sixhatssolver)
   - [⬜ **White Hat: Data \& Information**](#-white-hat-data--information)
   - [🟥 **Red Hat: Emotions \& Intuition**](#-red-hat-emotions--intuition)
   - [⬛ **Black Hat: Caution \& Critical Judgment**](#-black-hat-caution--critical-judgment)
   - [🟨 **Yellow Hat: Optimism \& Benefits**](#-yellow-hat-optimism--benefits)
-  - [🟩 **Green Hat: Creativity \& Alternatives**](#-green-hat-creativity--alternatives)
+  - [🟩 **Green Hat: Creativity \& Alternatives** **Green Hat: Creativity \& Alternatives**](#-green-hat-creativity--alternatives-green-hat-creativity--alternatives)
   - [🟦 **Blue Hat: Final Synthesis \& Action Plan**](#-blue-hat-final-synthesis--action-plan)
 - [Comparison: Single LLM vs. Six Hats Agentic System](#comparison-single-llm-vs-six-hats-agentic-system)
-- [Key Standout Advantages of the Six Hats Solver](#key-standout-advantages-of-the-six-hats-solver)
+- [**Key Standout Advantages of the Six Hats Solver**](#key-standout-advantages-of-the-six-hats-solver)
   - [**1. Emotional Intelligence \& Change Management**](#1-emotional-intelligence--change-management)
   - [**2. Cognitive Rigor \& Bias Detection**](#2-cognitive-rigor--bias-detection)
   - [**3. Innovation Through Dedicated Creativity**](#3-innovation-through-dedicated-creativity)
-- [How We Built It](#how-we-built-it)
-- [Future Improvements](#future-improvements)
-  - [**1. Dynamic Orchestration**](#1-dynamic-orchestration)
-  - [**2. Sequential vs. Parallel Experiments**](#2-sequential-vs-parallel-experiments)
+- [**How We Built It**](#how-we-built-it)
+- [**Future Improvements**](#future-improvements)
+  - [**1. Adaptive Orchestration \& Hybrid Workflows**](#1-adaptive-orchestration--hybrid-workflows)
   - [**3. Human‑in‑the‑Loop Mode**](#3-humanintheloop-mode)
+  - [**4. Multi‑Model Hat Simulation**](#4-multimodel-hat-simulation)
 
 
 ## Problem Statement
@@ -193,6 +193,8 @@ jupyter notebook notebooks/six_hats_agentic_demo_ui.ipynb
 
 #### **Option B — Launch the ADK Web UI** (Recommended)
 
+![ADK Web UI Demo](./images/adk-web-ui-demo.gif)
+
 Run the application using the ADK web interface:
 
 ```bash
@@ -329,17 +331,20 @@ This makes Six Hats an ideal blueprint for designing multi‑agent AI systems wi
 
 ## Demo: End-to-End Six Hats Analysis Example
 
-Below is a walkthrough of how the SixHatsSolver processes a real-world decision. This illustrates the distinct thinking modes each hat contributes, and how the system synthesizes them into a balanced outcome.
+Below is a walkthrough of how the SixHatsSolver processes a real-world decision. For clarity and readability, the responses from each hat have been intentionally condensed to highlight the core functionality and reasoning style of that hat. This provides a clear demonstration of the system’s behavior without the full verbosity of actual agent outputs.
 
-### 📝 **Input Prompt to SixHatsSolver**
+## **Input Prompt to SixHatsSolver**
 
-> Should we implement a 4-day workweek?
->
-> * Current standard: 40 hours/week, Mon–Fri.
-> * Engineering Team Size: 12 developers.
-> * Current velocity: Average 45 story points per sprint.
-> * Industry Benchmark: 4-day week pilots in the UK showed 92% of companies continued the policy.
-> * Constraint: SLA requires 24/7 support rotation which currently relies on Friday coverage.
+```
+Evaluate whether our company should transition to a 4-day workweek.
+
+Context:
+- Current schedule: 40 hours/week, Monday–Friday.
+- Engineering team: 12 developers.
+- Velocity: ~45 story points per sprint.
+- SLA: Requires 24/7 coverage; Fridays currently part of on-call rotation.
+
+```
 
 ---
 
@@ -347,17 +352,9 @@ Below is a walkthrough of how the SixHatsSolver processes a real-world decision.
 
 **Role:** Neutral fact-finding and identifying information gaps.
 
-> "The question requires analysis of available data and identification of missing information.
+> **Checked Facts (Confirmed Data)** … productivity can increase (e.g., 40% at Microsoft Japan); talent attraction improves; legal considerations require review …
 >
-> **Available Data:**
->
-> * Engineering Team Size: 12 developers.
-> * Current Velocity: 45 story points per sprint…
->
-> **Information Gaps:**
->
-> * Can reduced working hours maintain or increase current velocity?
-> * How will 24/7 support rotation be managed under a new schedule?"
+> **Information Gaps** … impact on ~45 sprint points unknown; 24/7 Friday coverage needs definition …
 
 ---
 
@@ -365,23 +362,19 @@ Below is a walkthrough of how the SixHatsSolver processes a real-world decision.
 
 **Role:** Surfaces emotional and instinctual concerns.
 
-> "Oh, a 4-day workweek? My gut just **twists** a little. It feels… risky.
->
-> And the SLA… 24/7 support. My stomach clenches thinking about that. It feels like a big, cold, hard *no*."
+> My immediate gut reaction is **NO**. The idea of a four-day week feels risky given our 24/7 SLA obligations. The thought of reduced coverage—especially on Fridays—raises anxiety about potential service gaps. Compressing five days of work into four also feels like a setup for burnout rather than relief. Instinctively, this move seems premature and potentially destabilizing.
 
 ---
 
 ### ⬛ **Black Hat: Caution & Critical Judgment**
 
-**Role:** Identifies risks, weak points, and worst‑case scenarios.
+**Role:** Identifies risks, weak points, and worst-case scenarios.
 
-> "Let's dissect this with cold, hard logic.
+> **Top Risks** … coverage gaps on Fridays; reduced sprint days impact velocity …
 >
-> **The Core Problem: The Illusion of Efficiency**
-> To keep 40 hours, you'd condense them into four 10‑hour days.
+> **Failure Scenario** … Friday incident with no on‑call staff → SLA breach …
 >
-> **The SLA is a Bomb Waiting to Explode**
-> Failing to meet SLA expectations during transition is a real risk."
+> **Bottom Line** … 4‑day week is high risk without strong coverage …
 
 ---
 
@@ -389,40 +382,53 @@ Below is a walkthrough of how the SixHatsSolver processes a real-world decision.
 
 **Role:** Highlights opportunities and positive outcomes.
 
-> "I'm thrilled to share positive insights! The UK's 4‑day week pilot saw **92% of companies continue the policy**.
+> #### **Potential Benefits for the Engineering Team**
 >
-> The SLA challenge? Absolutely solvable with creative scheduling!"
-
----
-
-### 🟩 **Green Hat: Creativity & Alternatives**
-
-**Role:** Generates novel ideas unconstrained by current limitations.
-
-> "Alright—Green Hat activated! Hurdles are opportunities!
+> * **Productivity:** … higher focus, reduced burnout …
+> * **Well‑being:** … happier, less stressed employees …
+> * **Creativity:** … more clarity and innovative thinking …
 >
-> **1. Compressed & Staggered Power Sprint**
-> **2. AI‑Augmented Support Squad**
-> **3. Client‑Centric SLA Reimagining**"
+> #### **Addressing Challenges**
+>
+> * **Staggered Schedules:** … alternate teams to maintain coverage …
 
+### 🟩 **Green Hat: Creativity & Alternatives** **Green Hat: Creativity & Alternatives**
+
+**Role:** Generates novel ideas without constraints.
+
+>#### **Recommended Approach: Phased Pilot**
+>
+>* **Hybrid Rotation:** … 4 workdays + minimal Friday coverage …
+>* **Extended Shift:** … keep 5 days, condensed hours …
+>* **Pilot:** … 3‑month trial using Hybrid Rotation …
+>* **Success Metric:** … SLA breach < 1% …
+>* **If successful:** … expand model; adjust to 10‑day sprints …
+>
 ---
 
 ### 🟦 **Blue Hat: Final Synthesis & Action Plan**
 
-**Role:** Coordinates all hats and forms the final decision.
-
-> "Let's synthesize.
+>**Role:** Coordinates all hats and drives the final recommendation.
 >
-> **Decision:** A direct switch is too risky due to SLA constraints. But benefits are too compelling to ignore.
+>#### **Blue‑Hat Summary – 4-Day Workweek Decision**
 >
-> **Action Plan:**
+>##### **Decision Criteria**
 >
-> 1. Form an SLA task force to evaluate coverage solutions.
-> 2. Gather team sentiment and updated sprint metrics.
-> 3. If SLA concerns are resolved—run a limited pilot.
+>* Maintain engineering velocity
+>* Ensure 24/7 SLA coverage
+>* Support employee well‑being and retention
 >
-> **Conclusion:** Revisit rollout once a sustainable SLA model exists."
-
+>##### **Decision Matrix (High Level)**
+>
+>* **Scenario A — 4-Day Pilot:** Score **0.68**
+>* **Scenario B — 5-Day Status Quo:** Score **0.90**
+>
+>  * *Interpretation:* The 5‑day model currently performs better on risk and reliability.
+>
+>##### **Bottom Line**
+>
+>A 4‑day workweek **can** work, but only through a controlled, data‑driven pilot with strict SLA and productivity thresholds. If the pilot meets targets, proceed with scaling. If not, continue with the 5‑day schedule.
+>
 ---
 
 ## Comparison: Single LLM vs. Six Hats Agentic System
@@ -437,23 +443,21 @@ Below is a walkthrough of how the SixHatsSolver processes a real-world decision.
 
 ---
 
-## Key Standout Advantages of the Six Hats Solver
+## **Key Standout Advantages of the Six Hats Solver**
 
 ### **1. Emotional Intelligence & Change Management**
 
-The **Red Hat** highlights team anxiety—a factor traditional models overlook.
+The **Red Hat** provides a structured space for emotional and intuitive responses—an area where traditional analytical models fall short. By surfacing concerns, enthusiasm, hesitation, or instinctive reactions, it helps teams anticipate human‑centric challenges such as morale, resistance to change, or cultural impacts. This makes the solver particularly valuable in organizational decision‑making where emotional context meaningfully influences adoption and long‑term success.
 
 ### **2. Cognitive Rigor & Bias Detection**
 
-The **Black Hat** challenges the 92% success metric by identifying **survivorship bias**.
+The **Black Hat** is responsible for disciplined, critical evaluation. Beyond highlighting risks, it uncovers logical fallacies and cognitive biases that may distort a decision. For example, identifying **survivorship bias** in industry success metrics helps prevent overconfidence based on incomplete data. This hat ensures that decisions are grounded in realistic constraints and that potential weak points are identified before they cause downstream failures.
 
 ### **3. Innovation Through Dedicated Creativity**
 
-The **Green Hat** generates non‑standard, high‑value concepts (e.g., AI‑Assisted Triage).
+The **Green Hat** specializes in divergent thinking, producing unconventional alternatives and high‑value concepts that extend beyond standard solutions. Rather than refining existing ideas, it intentionally breaks patterns and explores new directions—such as proposing AI‑Assisted Triage or hybrid operational models. This dedicated creativity channel helps organizations escape incrementalism and discover opportunities that would otherwise be overlooked.
 
----
-
-## How We Built It
+## **How We Built It**
 
 The Six Hats Solver is built using:
 
@@ -462,30 +466,32 @@ The Six Hats Solver is built using:
 * **JupyterLab + ipykernel** for iterative development and debugging.
 * **Pydantic + python‑dotenv** for clean configuration management.
 * **Rich** for readable structured logs.
-* **LiteLLM** for flexible routing of LLM calls per hat or tool.
+* **LiteLLM** for flexible routing of LLM calls per hat or tool, and for enabling local model testing without incurring token costs or consuming daily limits on hosted Gemini models.
 
-A key innovation was an **AI‑assisted refinement loop**:
+We also acknowledge the use of **various Gemini and OpenAI models** throughout development—for code generation, analysis, evaluation, and iterative refinement. Their feedback and reasoning audits significantly improved the design of agent roles and the reliability of the overall system.
+
+Additionally, all images used in this project are credited to **Nano Banana Pro**, whose visual assets helped bring clarity and approachability to the Six Hats conceptual model.
+
+We also incorporated an **AI‑assisted refinement loop**, which—while not novel in itself—proved effective for iteratively improving agent behavior and overall system reliability:
 
 * We captured ADK session JSON logs.
-* Fed them into advanced models (e.g., Gemini Pro) to audit reasoning flow.
-* Combined LLM feedback with human judgment to refine prompts and agent roles.
+* Fed them into advanced LLMs (e.g., Gemini Pro, OpenAI models) to audit reasoning flow.
+* Combined LLM feedback with human judgment to refine prompts and agent behavior.
 
-This led to a robust, predictable, and transparent cognitive architecture.
+This collaborative workflow led to a robust, predictable, and transparent cognitive architecture.
 
 ---
 
-## Future Improvements
+## **Future Improvements**
 
-### **1. Dynamic Orchestration**
+### **1. Adaptive Orchestration & Hybrid Workflows**
 
-Use a Smart Orchestrator Agent to choose hat order based on problem type.
-
-### **2. Sequential vs. Parallel Experiments**
-
-Test workflows where hats inform each other instead of operating independently.
+Future improvements aim to make the Six Hats Solver more adaptive by allowing the system to determine not only *which* hats to run but also *how* they interact. A Smart Orchestrator Agent could dynamically select the most relevant hats based on the problem type and context—such as prioritizing the White Hat for data‑heavy tasks or the Green Hat for ideation. In addition, the solver may explore hybrid workflows where hats run in parallel but can also influence one another sequentially. For example, White Hat insights might directly inform a more grounded Green Hat brainstorming phase. This combined approach would create a more flexible, efficient, and context‑aware reasoning pipeline tailored to real‑world decision‑making needs.
 
 ### **3. Human‑in‑the‑Loop Mode**
 
-Enable interactive refinement between hats and users.
+This feature introduces interactive checkpoints where human users can review, adjust, or guide hat outputs during the reasoning process. For example, a user may refine the problem framing after seeing the White Hat’s data summary or provide emotional context before the Red Hat evaluation. Adding this interactivity increases transparency, improves alignment with user expectations, and makes the solver more suitable for collaborative decision workflows.
 
----
+### **4. Multi‑Model Hat Simulation**
+
+Explore the use of **multiple underlying LLMs per hat** to enrich hat‑specific reasoning styles. For example, the **Red Hat** could combine outputs from both Gemini and OpenAI models to produce a more diverse range of emotional and intuitive responses. Leveraging models with different strengths—such as creativity, precision, or emotional tone—can lead to more nuanced, realistic, and cognitively diverse outcomes across all hats.
