@@ -2,7 +2,7 @@
 
 # Six Hats Solver <!-- omit in toc -->
 
-![Six Hats Solver Banner](https://github.com/praveenprabharavindran/agents-intensive-capstone-2025/blob/main/images/SixHatsSolver.png?raw=true) 
+![Six Hats Solver Banner](./images/SixHatsSolver.png) 
 
 
 ## Executive Summary
@@ -27,7 +27,7 @@ The Six Hats Solver uses autonomous agents to replicate Edward de Bono’s struc
   - [1. Configure Environment Variables](#1-configure-environment-variables)
   - [2. Choose How You Want to Run the Application](#2-choose-how-you-want-to-run-the-application)
     - [**Option A — Run the Jupyter Notebook Demo**](#option-a--run-the-jupyter-notebook-demo)
-    - [**Option B — Launch the ADK Web UI**](#option-b--launch-the-adk-web-ui)
+    - [**Option B — Launch the ADK Web UI** (Recommended)](#option-b--launch-the-adk-web-ui-recommended)
     - [**Option C — Run in the Command Line**](#option-c--run-in-the-command-line)
 - [What We Create: System Architecture Overview](#what-we-create-system-architecture-overview)
   - [**High‑Level Architecture**](#highlevel-architecture)
@@ -67,6 +67,8 @@ Our solution is an AI-powered Six Hat Problem Solver. It uses autonomous agents 
 
 ## What is Six Thinking Hats?
 
+![Six hats buy a coffee machine](./images/SixHats-Buy-a-Coffee-Machine.png)
+
 The Six Thinking Hats method was created by **Dr. Edward de Bono**, who pioneered the concept of *parallel thinking*. His work introduced a structured way for individuals and teams to think more clearly, creatively, and collaboratively.
 
 The Six Thinking Hats is a parallel thinking process that helps teams move away from argument and towards a comprehensive view of a situation. By "wearing" different hats, we can separate ego from performance and focus on one mode of thinking at a time.
@@ -79,6 +81,8 @@ The Six Thinking Hats is a parallel thinking process that helps teams move away 
 | **Yellow** | 🟨 | **Benefits & Optimism**    | Symbolizes brightness and positivity. It explores the benefits, value, and optimistic viewpoints. It looks for logical reasons why an idea will work.                 |
 | **Green**  | 🟩 | **Creativity & New Ideas** | Focuses on creativity, alternatives, possibilities, and new concepts. It is used to generate new ideas and move beyond known solutions.                               |
 | **Blue**   | 🟦 | **Process & Control**      | The "Hat of Hats" used for managing the thinking process itself. It ensures the guidelines are observed, organizes the other hats, and synthesizes the outcomes.      |
+
+
 
 ## Installation & Setup
 
@@ -187,7 +191,7 @@ Use the interactive UI demo inside Jupyter:
 jupyter notebook notebooks/six_hats_agentic_demo_ui.ipynb
 ```
 
-#### **Option B — Launch the ADK Web UI**
+#### **Option B — Launch the ADK Web UI** (Recommended)
 
 Run the application using the ADK web interface:
 
