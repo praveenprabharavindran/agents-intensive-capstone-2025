@@ -16,14 +16,14 @@ The Six Hats Solver uses autonomous agents to replicate Edward de Bono’s struc
 - [Problem Statement](#problem-statement)
   - [Our Solution](#our-solution)
 - [What is Six Thinking Hats?](#what-is-six-thinking-hats)
-- [Code Setup](#code-setup)
+- [Installation \& Setup](#installation--setup)
   - [Prerequisites](#prerequisites)
   - [Clone the Repository](#clone-the-repository)
   - [Set Up Your Development Environment](#set-up-your-development-environment)
   - [PowerShell (Windows)](#powershell-windows)
   - [Linux / macOS (Bash)](#linux--macos-bash)
   - [Install the Project in Editable Mode](#install-the-project-in-editable-mode)
-- [Run the Project](#run-the-project)
+- [Running the Solver](#running-the-solver)
   - [1. Configure Environment Variables](#1-configure-environment-variables)
   - [2. Choose How You Want to Run the Application](#2-choose-how-you-want-to-run-the-application)
     - [**Option A — Run the Jupyter Notebook Demo**](#option-a--run-the-jupyter-notebook-demo)
@@ -80,9 +80,11 @@ The Six Thinking Hats is a parallel thinking process that helps teams move away 
 | **Green**  | 🟩 | **Creativity & New Ideas** | Focuses on creativity, alternatives, possibilities, and new concepts. It is used to generate new ideas and move beyond known solutions.                               |
 | **Blue**   | 🟦 | **Process & Control**      | The "Hat of Hats" used for managing the thinking process itself. It ensures the guidelines are observed, organizes the other hats, and synthesizes the outcomes.      |
 
-## Code Setup
+## Installation & Setup
 
-This section guides you through setting up the project locally so you can run, develop, and modify the `agents_intensive_capstone` (Six Hats Solver) codebase.
+This section provides everything you need to install, configure, and prepare the Six Hats Solver for local development.
+
+Follow the steps below to get the project running on your machine in a developer‑friendly workflow commonly used across GitHub projects.
 
 ### Prerequisites
 
@@ -156,7 +158,9 @@ Editable mode lets you modify the project source code and immediately test chang
 pip install -e ".[dev]"
 ```
 
-## Run the Project
+## Running the Solver
+
+After installation and configuration, you can launch the Six Hats Solver using any of the supported execution modes below.
 
 Once your environment is set up, follow these steps to prepare and run the Six Hats Solver.
 
