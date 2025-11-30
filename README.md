@@ -1,8 +1,8 @@
 
 
-# Six Hats Solver
+# Six Hats Solver <!-- omit in toc -->
 
-![Six Hats Solver Banner](https://github.com/praveenprabharavindran/agents-intensive-capstone-2025/blob/main/images/SixHatsSolver.png?raw=true)
+![Six Hats Solver Banner](https://github.com/praveenprabharavindran/agents-intensive-capstone-2025/blob/main/images/SixHatsSolver.png?raw=true) 
 
 
 ## Executive Summary
@@ -11,22 +11,51 @@ The Six Hats Solver uses autonomous agents to replicate Edward de Bono’s struc
 
 ## Table of Contents
 
-* [Problem Statement](#problem-statement)
-* [Our Solution](#our-solution)
-* [What is Six Thinking Hats?](#what-is-six-thinking-hats)
-* [Overview](#overview)
-* [Prerequisites](#prerequisites)
-* [Clone the Repository](#clone-the-repository)
-* [Set Up Your Development Environment](#set-up-your-development-environment)
-* [Install the Project](#install-the-project-in-editable-mode)
-* [Run the Project](#run-the-project)
-* [What We Create: System Architecture](#what-we-create-system-architecture-overview)
-* [Why Six Hats Works for AI](#why-six-hats-works-for-ai)
-* [Demo](#demo-end-to-end-six-hats-analysis-example)
-* [Comparison](#comparison-single-llm-vs-six-hats-agentic-system)
-* [Key Advantages](#key-standout-advantages-of-the-six-hats-solver)
-* [How We Built It](#how-we-built-it)
-* [Future Improvements](#future-improvements)
+- [Executive Summary](#executive-summary)
+- [Table of Contents](#table-of-contents)
+- [Problem Statement](#problem-statement)
+  - [Our Solution](#our-solution)
+- [What is Six Thinking Hats?](#what-is-six-thinking-hats)
+- [Code Setup](#code-setup)
+  - [Prerequisites](#prerequisites)
+  - [Clone the Repository](#clone-the-repository)
+  - [Set Up Your Development Environment](#set-up-your-development-environment)
+  - [PowerShell (Windows)](#powershell-windows)
+  - [Linux / macOS (Bash)](#linux--macos-bash)
+  - [Install the Project in Editable Mode](#install-the-project-in-editable-mode)
+- [Run the Project](#run-the-project)
+  - [1. Configure Environment Variables](#1-configure-environment-variables)
+  - [2. Choose How You Want to Run the Application](#2-choose-how-you-want-to-run-the-application)
+    - [**Option A — Run the Jupyter Notebook Demo**](#option-a--run-the-jupyter-notebook-demo)
+    - [**Option B — Launch the ADK Web UI**](#option-b--launch-the-adk-web-ui)
+    - [**Option C — Run in the Command Line**](#option-c--run-in-the-command-line)
+- [What We Create: System Architecture Overview](#what-we-create-system-architecture-overview)
+  - [**High‑Level Architecture**](#highlevel-architecture)
+  - [**1. SixHatsBrainstorm (Entry Point)**](#1-sixhatsbrainstorm-entry-point)
+  - [**2. SixHatsSolver (Sequential Controller Agent)**](#2-sixhatssolver-sequential-controller-agent)
+  - [**3. Step 1 — Parallel Brainstorming**](#3-step-1--parallel-brainstorming)
+  - [**4. Step 2 — Judgment \& Synthesis (Blue Hat)**](#4-step-2--judgment--synthesis-blue-hat)
+  - [**Result**](#result)
+- [Why Six Hats Works for AI](#why-six-hats-works-for-ai)
+- [Demo: End-to-End Six Hats Analysis Example](#demo-end-to-end-six-hats-analysis-example)
+  - [📝 **Input Prompt to SixHatsSolver**](#-input-prompt-to-sixhatssolver)
+  - [⬜ **White Hat: Data \& Information**](#-white-hat-data--information)
+  - [🟥 **Red Hat: Emotions \& Intuition**](#-red-hat-emotions--intuition)
+  - [⬛ **Black Hat: Caution \& Critical Judgment**](#-black-hat-caution--critical-judgment)
+  - [🟨 **Yellow Hat: Optimism \& Benefits**](#-yellow-hat-optimism--benefits)
+  - [🟩 **Green Hat: Creativity \& Alternatives**](#-green-hat-creativity--alternatives)
+  - [🟦 **Blue Hat: Final Synthesis \& Action Plan**](#-blue-hat-final-synthesis--action-plan)
+- [Comparison: Single LLM vs. Six Hats Agentic System](#comparison-single-llm-vs-six-hats-agentic-system)
+- [Key Standout Advantages of the Six Hats Solver](#key-standout-advantages-of-the-six-hats-solver)
+  - [**1. Emotional Intelligence \& Change Management**](#1-emotional-intelligence--change-management)
+  - [**2. Cognitive Rigor \& Bias Detection**](#2-cognitive-rigor--bias-detection)
+  - [**3. Innovation Through Dedicated Creativity**](#3-innovation-through-dedicated-creativity)
+- [How We Built It](#how-we-built-it)
+- [Future Improvements](#future-improvements)
+  - [**1. Dynamic Orchestration**](#1-dynamic-orchestration)
+  - [**2. Sequential vs. Parallel Experiments**](#2-sequential-vs-parallel-experiments)
+  - [**3. Human‑in‑the‑Loop Mode**](#3-humanintheloop-mode)
+
 
 ## Problem Statement
 
@@ -44,18 +73,18 @@ The Six Thinking Hats is a parallel thinking process that helps teams move away 
 
 | Hat        |    | Perspective                | Description                                                                                                                                                           |
 | ---------- | -- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **White**  | ⚪  | **Facts & Information**    | Focuses on available data, facts, and what information is missing. It is neutral and objective, looking at the problem purely from an informational standpoint.       |
-| **Red**    | 🔴 | **Feelings & Intuition**   | Represents emotions, hunches, and gut feelings. It allows for the expression of fears, likes, and dislikes without the need for logical justification or explanation. |
-| **Black**  | ⚫  | **Caution & Critical**     | Focuses on risk assessment, identifying potential problems, and why something might not work. It is the hat of judgment and caution, vital for avoiding mistakes.     |
-| **Yellow** | 🟡 | **Benefits & Optimism**    | Symbolizes brightness and positivity. It explores the benefits, value, and optimistic viewpoints. It looks for logical reasons why an idea will work.                 |
-| **Green**  | 🟢 | **Creativity & New Ideas** | Focuses on creativity, alternatives, possibilities, and new concepts. It is used to generate new ideas and move beyond known solutions.                               |
-| **Blue**   | 🔵 | **Process & Control**      | The "Hat of Hats" used for managing the thinking process itself. It ensures the guidelines are observed, organizes the other hats, and synthesizes the outcomes.      |
+| **White**  | ⬜  | **Facts & Information**    | Focuses on available data, facts, and what information is missing. It is neutral and objective, looking at the problem purely from an informational standpoint.       |
+| **Red**    | 🟥 | **Feelings & Intuition**   | Represents emotions, hunches, and gut feelings. It allows for the expression of fears, likes, and dislikes without the need for logical justification or explanation. |
+| **Black**  | ⬛  | **Caution & Critical**     | Focuses on risk assessment, identifying potential problems, and why something might not work. It is the hat of judgment and caution, vital for avoiding mistakes.     |
+| **Yellow** | 🟨 | **Benefits & Optimism**    | Symbolizes brightness and positivity. It explores the benefits, value, and optimistic viewpoints. It looks for logical reasons why an idea will work.                 |
+| **Green**  | 🟩 | **Creativity & New Ideas** | Focuses on creativity, alternatives, possibilities, and new concepts. It is used to generate new ideas and move beyond known solutions.                               |
+| **Blue**   | 🟦 | **Process & Control**      | The "Hat of Hats" used for managing the thinking process itself. It ensures the guidelines are observed, organizes the other hats, and synthesizes the outcomes.      |
 
-## Overview
+## Code Setup
 
 This section guides you through setting up the project locally so you can run, develop, and modify the `agents_intensive_capstone` (Six Hats Solver) codebase.
 
-## Prerequisites
+### Prerequisites
 
 Before beginning, ensure the following tools are installed:
 
@@ -65,7 +94,7 @@ Before beginning, ensure the following tools are installed:
 | **Git**        | (optional)      | Used to clone the repository         | `git --version`        |
 | **Virtualenv** | (recommended)   | Creates isolated Python environments | `python -m venv .venv` |
 
-## Clone the Repository
+### Clone the Repository
 
 Clone the repository using SSH or HTTPS:
 
@@ -80,7 +109,7 @@ git clone git@github.com:praveenprabharavindran/agents-intensive-capstone-2025.g
 git clone https://github.com/praveenprabharavindran/agents-intensive-capstone-2025.git
 ```
 
-## Set Up Your Development Environment
+### Set Up Your Development Environment
 
 Follow the instructions for your operating system to create and activate a virtual environment.
 
@@ -119,7 +148,7 @@ source .venv/bin/activate
 # python -m pip install --upgrade pip
 ```
 
-## Install the Project in Editable Mode
+### Install the Project in Editable Mode
 
 Editable mode lets you modify the project source code and immediately test changes without reinstalling.
 
