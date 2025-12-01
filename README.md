@@ -408,7 +408,7 @@ Context:
 
 ### 🟦 **Blue Hat: Final Synthesis & Action Plan**
 
->**Role:** Coordinates all hats and drives the final recommendation.
+**Role:** Coordinates all hats and drives the final recommendation.
 >
 >#### **Blue‑Hat Summary – 4-Day Workweek Decision**
 >

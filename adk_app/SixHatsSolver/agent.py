@@ -106,7 +106,7 @@ def build_six_hats_agent() -> SequentialAgent:
         red_hat = red_hat_factory.RedHatFactory.create(model=gemini)
         
         # BLACK HAT: Caution & Risk
-        black_hat = black_hat_factory.BlackHatFactory.create(model=gpt)
+        black_hat = black_hat_factory.BlackHatFactory.create(model=gemini)
         
         # YELLOW HAT: Optimism & Benefits
         yellow_hat = yellow_hat_factory.YellowHatFactory.create(
@@ -115,10 +115,10 @@ def build_six_hats_agent() -> SequentialAgent:
         )
         
         # GREEN HAT: Creativity & Alternatives
-        green_hat = green_hat_factory.GreenHatFactory.create(model=gpt)
+        green_hat = green_hat_factory.GreenHatFactory.create(model=gemini)
         
         # BLUE HAT: The Manager/Synthesizer
-        blue_hat = blue_hat_factory.BlueHatFactory.create(model=gpt)
+        blue_hat = blue_hat_factory.BlueHatFactory.create(model=gemini)
 
         logger.info("All Hat sub-agents created successfully.")
 
