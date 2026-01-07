@@ -47,3 +47,28 @@ def get_positive_data(topic: str) -> str:
             "successful delivery of three major milestones ahead of schedule. "
             "This model is now being scaled globally for maximum positive impact."
         )
+
+    # 5. Customer Experience / NPS
+    elif "customer" in topic_lower or "cx" in topic_lower or "nps" in topic_lower or "retention" in topic_lower:
+        return (
+            "**Customer Delight Metrics:** Net Promoter Score surged to **+72**, "
+            "with **retention up 14%** and **time-to-resolution down 38%**. "
+            "A refreshed feedback loop unlocked **5 high-impact feature wins**, "
+            "driving sustained loyalty and organic advocacy."
+        )
+
+    # 6. Security & Zero Trust
+    elif "security" in topic_lower or "zero trust" in topic_lower or "infosec" in topic_lower or "cyber" in topic_lower:
+        return (
+            "**Security Uplift:** Zero Trust adoption reduced **credential abuse by 93%**, "
+            "while automated threat detection cut **MTTD to 8 minutes** and **MTTR to under 30 minutes**. "
+            "Audit success rates hit **99.7%** with proactive controls."
+        )
+
+    # 7. AI / Machine Learning / Automation
+    elif "ai" in topic_lower or "ml" in topic_lower or "model" in topic_lower or "automation" in topic_lower:
+        return (
+            "**AI Breakthrough:** A lightweight inference pipeline improved "
+            "**prediction accuracy by 11%** and **cut serving costs by 47%**. "
+            "Human-in-the-loop review boosted trust and produced **2x faster iteration cycles**."
+        )
